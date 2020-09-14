@@ -1,0 +1,7 @@
+.TodoList h1 {
+    font-size: 3rem;
+}
+
+.TodoList h1 span {
+    color: #0f0;
+}
