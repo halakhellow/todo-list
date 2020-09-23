@@ -43,12 +43,16 @@ class TodoItem extends Component {
           </form>
         ) : (
           <div className="TodoItem">
-            <li
-              className={this.props.completed ? "TodoItem-strike" : ""}
-              onClick={this.handleCompletion}
-            >
-              {this.props.task}
-            </li>
+            <div>
+              <input
+                type="checkbox"
+                className="TodoItem-checkbox"
+                onClick={this.handleCompletion}
+              />
+              <li className={this.props.completed ? "checked" : ""}>
+                {this.props.task}
+              </li>
+            </div>
             <div>
               <button onClick={this.handleEdit}>
                 <i className="fa fa-pencil"></i>
