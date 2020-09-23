@@ -10,10 +10,28 @@
     margin: 1rem auto;
 }
 
+.TodoItem-checkbox {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 1rem;
+}
+
+.checked {
+    position: relative;
+}
+
+.checked::before {
+    position: absolute;
+    content: "";
+    left: -0.5rem;
+    top: 50%;
+    right: -0.5rem;
+    border-top: 3px solid #f00 !important;
+}
+
 .TodoItem li {
+    display: inline;
     list-style-type: none;
-    background: none;
-    border: none;
     font-size: 1.4rem;
 }
 
@@ -27,7 +45,7 @@
 }
 
 .TodoItem button:first-of-type {
-    color: yellow;
+    color: #fbff12;
 }
 
 .TodoItem button:last-of-type {
@@ -51,23 +69,10 @@
     height: 2.5rem;
     border-radius: 25px;
     width: 2.5rem;
-    background-color: yellow;
+    background-color: #fbff12;
     cursor: pointer;
     font-size: 1.2rem;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.TodoItem-strike {
-    position: relative;
-}
-
-.TodoItem-strike:before {
-    position: absolute;
-    content: "";
-    left: -0.5rem;
-    top: 50%;
-    right: -0.5rem;
-    border-top: 3px solid #f00 !important;
 }
