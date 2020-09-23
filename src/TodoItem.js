@@ -44,14 +44,20 @@ class TodoItem extends Component {
         ) : (
           <div className="TodoItem">
             <div>
-              <input
-                type="checkbox"
-                className="TodoItem-checkbox"
-                onClick={this.handleCompletion}
-              />
-              <li className={this.props.completed ? "checked" : ""}>
+              <label
+                htmlFor={this.props.id}
+                className={` container ${
+                  this.props.completed ? "checked" : ""
+                }`}
+              >
                 {this.props.task}
-              </li>
+                <input
+                  id={this.props.id}
+                  type="checkbox"
+                  onClick={this.handleCompletion}
+                />
+                <span className="checkmark"></span>
+              </label>
             </div>
             <div>
               <button onClick={this.handleEdit}>
