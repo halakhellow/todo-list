@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TodoItem from "./TodoItem";
 import TodoForm from "./TodoForm";
+import thumbtack from "./thumbtack.png";
 import "./TodoList.css";
 
 class TodoList extends Component {
@@ -49,12 +50,15 @@ class TodoList extends Component {
       />
     ));
     return (
-      <div className="TodoList">
-        <h1>
-          <span>Todo</span>List
+      <div>
+        <h1 className="TodoList-title">
+          To Do :
+          <img src={thumbtack} />
         </h1>
-        <TodoForm add={this.addTodo} />
-        <div>{todos}</div>
+        <div className="TodoList">
+          <TodoForm add={this.addTodo} />
+          <div>{todos}</div>
+        </div>
       </div>
     );
   }
