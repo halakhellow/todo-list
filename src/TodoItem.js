@@ -50,7 +50,7 @@ class TodoItem extends Component {
                   this.props.completed ? "checked" : ""
                 }`}
               >
-                {this.props.task}
+                <span>{this.props.task}</span>
                 <input
                   id={this.props.id}
                   type="checkbox"
