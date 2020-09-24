@@ -1,7 +1,19 @@
-.TodoList h1 {
-    font-size: 3rem;
+.TodoList-title {
+  font-size: 3rem;
+  font-family: 'Courgette', cursive;
+  width: 15rem;
+  height: 10rem;
+  background-color: #fbef8a;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-10deg);
+  margin: 3rem auto;
 }
 
-.TodoList h1 span {
-    color: #0f0;
+.TodoList-title img {
+  position: absolute;
+  top: 0;
+  width: 2.5rem;
 }

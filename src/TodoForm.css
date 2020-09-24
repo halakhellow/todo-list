@@ -1,23 +1,27 @@
 .TodoForm input {
-    padding: 0.5rem 1rem;
-    border: none;
-    height: 1.7rem;
-    border-radius: 12px;
-    width: 17rem;
-    margin: 0.25rem;
-    transition: .5s;
-    font-size: 1.15rem;
-    font-family: inherit;
+  padding: 0.5rem 1rem;
+  border: none;
+  height: 1.7rem;
+  border-radius: 12px;
+  width: 17rem;
+  margin: 0.25rem;
+  transition: 0.5s;
+  font-size: 1.15rem;
+  font-family: inherit;
+  outline: none;
 }
 
 .TodoForm button {
-    border: none;
-    height: 2.7rem;
-    border-radius: 25px;
-    width: 2.7rem;
-    background-color: #0f0;
-    cursor: pointer;
-    font-size: 1.5rem;
-    font-weight: 800;
-    margin: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  height: 2.7rem;
+  border-radius: 25px;
+  width: 2.7rem;
+  background-color: #fbef8a;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0.25rem;
 }
