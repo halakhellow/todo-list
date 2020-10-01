@@ -55,6 +55,7 @@ class TodoItem extends Component {
                   id={this.props.id}
                   type="checkbox"
                   onClick={this.handleCompletion}
+                  checked={this.props.checked}
                 />
                 <span className="checkmark"></span>
               </label>

@@ -8,7 +8,7 @@ class TodoList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos: [],
+      todos: JSON.parse(window.localStorage.getItem("todos") || "[]"),
     };
     this.addTodo = this.addTodo.bind(this);
     this.removeTodo = this.removeTodo.bind(this);
@@ -17,25 +17,34 @@ class TodoList extends Component {
   }
 
   addTodo(todo) {
-    this.setState({ todos: [...this.state.todos, todo] });
+    this.setState({ todos: [...this.state.todos, todo] }, () =>
+      window.localStorage.setItem("todos", JSON.stringify(this.state.todos))
+    );
   }
   removeTodo(id) {
     let newTodos = this.state.todos.filter((todo) => todo.id !== id);
-    this.setState({ todos: newTodos });
+    this.setState({ todos: newTodos }, () =>
+      window.localStorage.setItem("todos", JSON.stringify(this.state.todos))
+    );
   }
   editTask(id, newTask) {
     let editedTodos = this.state.todos.map((todo) => {
       if (todo.id === id) return { ...todo, task: newTask };
       return todo;
     });
-    this.setState({ todos: editedTodos });
+    this.setState({ todos: editedTodos }, () =>
+      window.localStorage.setItem("todos", JSON.stringify(this.state.todos))
+    );
   }
   completedTask(id) {
     let completedTodos = this.state.todos.map((todo) => {
-      if (todo.id === id) return { ...todo, completed: !todo.completed };
+      if (todo.id === id)
+        return { ...todo, completed: !todo.completed, checked: !todo.checked };
       return todo;
     });
-    this.setState({ todos: completedTodos });
+    this.setState({ todos: completedTodos }, () =>
+      window.localStorage.setItem("todos", JSON.stringify(this.state.todos))
+    );
   }
   render() {
     let todos = this.state.todos.map((todo) => (
@@ -44,6 +53,7 @@ class TodoList extends Component {
         key={todo.id}
         task={todo.task}
         completed={todo.completed}
+        checked={todo.checked}
         remove={this.removeTodo}
         edit={this.editTask}
         complete={this.completedTask}
