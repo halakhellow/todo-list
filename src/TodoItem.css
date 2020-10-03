@@ -1,7 +1,7 @@
 .TodoItem,
 .TodoItem-edit {
     padding: 0.5rem;
-    border-bottom: 4px solid #fff;
+    border-bottom: 4px solid whitesmoke;
     margin-bottom: 1.5rem;
     display: flex;
     align-content: space-between;
@@ -36,13 +36,13 @@
     left: 0;
     height: 16px;
     width: 16px;
-    border: 2px solid green;
+    border: 2px solid #fbef8a;
     border-radius: 4px;
 }
 
 /* When the checkbox is checked, add a green background */
 .container input:checked~.checkmark {
-    background-color: green;
+    background-color: #fbef8a;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -63,13 +63,14 @@
     top: 0;
     width: 5px;
     height: 10px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
+    border: solid black;
+    border-width: 0 2.5px 2.5px 0;
     transform: rotate(45deg);
 }
 
 .checked {
     position: relative;
+    color: #c5c3c0;
 }
 
 .checked::before {
@@ -78,7 +79,7 @@
     left: 1.9rem;
     top: 65%;
     right: -0.3rem;
-    border-top: 3px solid #f00 !important;
+    border-top: 3px solid #d32d00 !important;
 }
 
 .TodoItem label {
@@ -97,14 +98,15 @@
     font-size: 1.15rem;
     font-weight: 900;
     cursor: pointer;
+    outline: none;
 }
 
 .TodoItem button:first-of-type {
-    color: #ffef66;
+    color: #fbef8a;
 }
 
 .TodoItem button:last-of-type {
-    color: #f00;
+    color: #c5c3c0;
 }
 
 .TodoItem-edit input {
@@ -126,8 +128,9 @@
     width: 2rem;
     background-color: #fbef8a;
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    outline: none;
 }

@@ -12,16 +12,13 @@
 }
 
 .TodoForm button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   border: none;
   height: 2.7rem;
-  border-radius: 25px;
+  border-radius: 50%;
   width: 2.7rem;
   background-color: #fbef8a;
   cursor: pointer;
   font-size: 1.5rem;
-  font-weight: 600;
   margin: 0.25rem;
+  outline: none;
 }
