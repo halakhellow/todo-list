@@ -7,19 +7,23 @@ class TodoForm extends Component {
     super(props);
     this.state = {
       todo: "",
+      disabled: true,
     };
     this.handelChange = this.handelChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handelChange(event) {
-    this.setState({ todo: event.target.value });
+    this.setState({ todo: event.target.value }, () => {
+      if (this.state.todo !== "") this.setState({ disabled: false });
+      else this.setState({ disabled: true });
+    });
   }
 
   handleSubmit(event) {
     event.preventDefault();
     this.props.add({ task: this.state.todo, id: uuid(), completed: false });
-    this.setState({ todo: "" });
+    this.setState({ todo: "", disabled: true });
   }
 
   render() {
@@ -30,7 +34,7 @@ class TodoForm extends Component {
           value={this.state.todo}
           onChange={this.handelChange}
         />
-        <button>+</button>
+        <button disabled={this.state.disabled}>+</button>
       </form>
     );
   }
