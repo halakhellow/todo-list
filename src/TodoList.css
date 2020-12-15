@@ -1,6 +1,6 @@
 .TodoList-title {
   font-size: 3rem;
-  font-family: 'Courgette', cursive;
+  font-family: "Courgette", cursive;
   width: 15rem;
   height: 10rem;
   background-color: #fbef8a;
@@ -16,4 +16,12 @@
   position: absolute;
   top: 0;
   width: 2.5rem;
+}
+
+.TodoList ul {
+  padding-left: 0;
+}
+
+.TodoList div[data-rbd-drag-handle-context-id="1"] {
+  cursor: default;
 }
