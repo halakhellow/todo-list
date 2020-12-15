@@ -3,6 +3,7 @@ import TodoItem from "./TodoItem";
 import TodoForm from "./TodoForm";
 import thumbtack from "./thumbtack.png";
 import "./TodoList.css";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 class TodoList extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class TodoList extends Component {
     this.removeTodo = this.removeTodo.bind(this);
     this.editTask = this.editTask.bind(this);
     this.completedTask = this.completedTask.bind(this);
+    this.handleOnDragEnd = this.handleOnDragEnd.bind(this);
   }
 
   addTodo(todo) {
@@ -46,18 +48,36 @@ class TodoList extends Component {
       window.localStorage.setItem("todos", JSON.stringify(this.state.todos))
     );
   }
+  handleOnDragEnd(result) {
+    if (!result.destination) return;
+    if (
+      result.source.droppableId === result.destination.droppableId &&
+      result.source.index === result.destination.index
+    )
+      return;
+    let updatedTodos = this.state.todos;
+    let [reorderedItem] = updatedTodos.splice(result.source.index, 1);
+    updatedTodos.splice(result.destination.index, 0, reorderedItem);
+
+    this.setState({ todos: updatedTodos });
+  }
   render() {
-    let todos = this.state.todos.map((todo) => (
-      <TodoItem
-        id={todo.id}
-        key={todo.id}
-        task={todo.task}
-        completed={todo.completed}
-        checked={todo.checked}
-        remove={this.removeTodo}
-        edit={this.editTask}
-        complete={this.completedTask}
-      />
+    let todos = this.state.todos.map((todo, index) => (
+      <Draggable key={todo.id} draggableId={todo.task} index={index}>
+        {(provided) => (
+          <TodoItem
+            innerRef={provided.innerRef}
+            provided={provided}
+            id={todo.id}
+            task={todo.task}
+            completed={todo.completed}
+            checked={todo.checked}
+            remove={this.removeTodo}
+            edit={this.editTask}
+            complete={this.completedTask}
+          />
+        )}
+      </Draggable>
     ));
     return (
       <div>
@@ -67,7 +87,16 @@ class TodoList extends Component {
         </h1>
         <div className="TodoList">
           <TodoForm add={this.addTodo} />
-          <div>{todos}</div>
+          <DragDropContext onDragEnd={this.handleOnDragEnd}>
+            <Droppable droppableId="todo-items">
+              {(provided) => (
+                <ul {...provided.droppableProps} ref={provided.innerRef}>
+                  {todos}
+                  {provided.placeholder}
+                </ul>
+              )}
+            </Droppable>
+          </DragDropContext>
         </div>
       </div>
     );
