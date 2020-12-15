@@ -32,8 +32,13 @@ class TodoItem extends Component {
     this.setState({ edit: false });
   }
   render() {
+    let { provided, innerRef } = this.props;
     return (
-      <div>
+      <div
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}
+        ref={innerRef}
+      >
         {this.state.edit ? (
           <form className="TodoItem-edit" onSubmit={this.handleSubmit}>
             <input value={this.state.newTask} onChange={this.handleChange} />
@@ -44,6 +49,7 @@ class TodoItem extends Component {
         ) : (
           <div className="TodoItem">
             <div>
+              <span className="fas fa-grip-horizontal"></span>
               <label
                 htmlFor={this.props.id}
                 className={` container ${
