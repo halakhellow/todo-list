@@ -55,7 +55,7 @@ class TodoList extends Component {
       result.source.index === result.destination.index
     )
       return;
-    let updatedTodos = this.state.todos;
+    let updatedTodos = Array.from(this.state.todos);
     let [reorderedItem] = updatedTodos.splice(result.source.index, 1);
     updatedTodos.splice(result.destination.index, 0, reorderedItem);
 
