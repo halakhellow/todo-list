@@ -8,6 +8,7 @@
   justify-content: space-between;
   width: 22rem;
   margin: 1rem auto;
+  background-color: #111;
 }
 
 .TodoItem .fa-grip-horizontal {
