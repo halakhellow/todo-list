@@ -14,25 +14,20 @@ class TodoList extends Component {
     this.state = {
       todos: JSON.parse(window.localStorage.getItem("todos") || "[]"),
     };
-    this.addTodo = this.addTodo.bind(this);
-    this.removeTodo = this.removeTodo.bind(this);
-    this.editTask = this.editTask.bind(this);
-    this.completedTask = this.completedTask.bind(this);
-    this.handleOnDragEnd = this.handleOnDragEnd.bind(this);
   }
 
-  addTodo(todo) {
+  addTodo = (todo) => {
     this.setState({ todos: [...this.state.todos, todo] }, () =>
       window.localStorage.setItem("todos", JSON.stringify(this.state.todos))
     );
-  }
-  removeTodo(id) {
+  };
+  removeTodo = (id) => {
     let newTodos = this.state.todos.filter((todo) => todo.id !== id);
     this.setState({ todos: newTodos }, () =>
       window.localStorage.setItem("todos", JSON.stringify(this.state.todos))
     );
-  }
-  editTask(id, newTask) {
+  };
+  editTask = (id, newTask) => {
     let editedTodos = this.state.todos.map((todo) => {
       if (todo.id === id) return { ...todo, task: newTask };
       return todo;
@@ -40,8 +35,8 @@ class TodoList extends Component {
     this.setState({ todos: editedTodos }, () =>
       window.localStorage.setItem("todos", JSON.stringify(this.state.todos))
     );
-  }
-  completedTask(id) {
+  };
+  completedTask = (id) => {
     let completedTodos = this.state.todos.map((todo) => {
       if (todo.id === id)
         return { ...todo, completed: !todo.completed, checked: !todo.checked };
@@ -50,8 +45,8 @@ class TodoList extends Component {
     this.setState({ todos: completedTodos }, () =>
       window.localStorage.setItem("todos", JSON.stringify(this.state.todos))
     );
-  }
-  handleOnDragEnd(result) {
+  };
+  handleOnDragEnd = (result) => {
     if (!result.destination) return;
     if (
       result.source.droppableId === result.destination.droppableId &&
@@ -63,7 +58,7 @@ class TodoList extends Component {
     updatedTodos.splice(result.destination.index, 0, reorderedItem);
 
     this.setState({ todos: updatedTodos });
-  }
+  };
   render() {
     let todos = this.state.todos.map((todo, index) => (
       <Draggable key={todo.id} draggableId={todo.task} index={index}>
