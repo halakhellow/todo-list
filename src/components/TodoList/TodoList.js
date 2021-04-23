@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import TodoItem from "./TodoItem";
-import TodoForm from "./TodoForm";
-import thumbtack from "./thumbtack.png";
-import "./TodoList.css";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+
+import TodoItem from "../TodoItem/TodoItem";
+import TodoForm from "../TodoForm/TodoForm";
+
+import thumbtack from "../../images/thumbtack.png";
+
+import "./TodoList.css";
 
 class TodoList extends Component {
   constructor(props) {
