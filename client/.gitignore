@@ -23,6 +23,3 @@ yarn-debug.log*
 yarn-error.log*
 
 
-# server files to ignore
-server/node_modules
-server/.env
