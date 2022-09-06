@@ -7,6 +7,8 @@ const apiRoutes = require("./routes");
 
 const app = express();
 
+require("./middleware/passport-setup");
+
 app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
