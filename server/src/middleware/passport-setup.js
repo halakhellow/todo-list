@@ -19,7 +19,7 @@ passport.use(
       const email = profile.emails[0].value;
       const profilePicture = profile.photos[0].value;
 
-      let user = await Users.find({ email });
+      let user = await Users.findOne({ email });
       if (!user) {
         user = await Users.create({
           provider,
