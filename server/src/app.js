@@ -11,14 +11,13 @@ const apiRoutes = require("./routes");
 const app = express();
 
 require("./middleware/passport-setup");
+app.use(cookieParser(process.env.SECRET_KEY));
+app.use(encryptCookieNodeMiddleware(process.env.SECRET_KEY));
 
 app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(morgan("tiny"));
-
-app.use(cookieParser(process.env.SECRET_KEY));
-app.use(encryptCookieNodeMiddleware(process.env.SECRET_KEY));
 
 app.use(
   "/api",
