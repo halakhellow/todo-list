@@ -1,84 +1,79 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import "./TodoItem.css";
 
-class TodoItem extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      edit: false,
-      newTask: this.props.task,
-    };
-    this.handleRemove = this.handleRemove.bind(this);
-    this.handleEdit = this.handleEdit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleCompletion = this.handleCompletion.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  handleRemove() {
-    this.props.remove(this.props.id);
-  }
-  handleEdit() {
-    this.setState({ edit: true });
-  }
-  handleChange(event) {
-    this.setState({ newTask: event.target.value });
-  }
-  handleCompletion() {
-    this.props.complete(this.props.id);
-  }
-  handleSubmit(event) {
+const TodoItem = ({
+  id,
+  task,
+  complete,
+  edit,
+  remove,
+  checked,
+  completed,
+  provided,
+  innerRef,
+}) => {
+  const [edition, setEdition] = useState(false);
+  const [newTask, setNewTask] = useState(task);
+  const handleRemove = () => {
+    remove(id);
+  };
+  const handleEdit = () => {
+    setEdition(true);
+  };
+  const handleChange = (event) => {
+    setNewTask(event.target.value);
+  };
+  const handleCompletion = () => {
+    complete(id);
+  };
+  const handleSubmit = (event) => {
     event.preventDefault();
-    this.props.edit(this.props.id, this.state.newTask);
-    this.setState({ edit: false });
-  }
-  render() {
-    let { provided, innerRef } = this.props;
-    return (
-      <div
-        {...provided.draggableProps}
-        {...provided.dragHandleProps}
-        ref={innerRef}
-      >
-        {this.state.edit ? (
-          <form className="TodoItem-edit" onSubmit={this.handleSubmit}>
-            <input value={this.state.newTask} onChange={this.handleChange} />
-            <button>
-              <i className="fa fa-check"></i>
-            </button>
-          </form>
-        ) : (
-          <div className="TodoItem">
-            <div>
-              <span className="fas fa-grip-horizontal"></span>
-              <label
-                htmlFor={this.props.id}
-                className={` container ${
-                  this.props.completed ? "checked" : ""
-                }`}
-              >
-                <span>{this.props.task}</span>
-                <input
-                  id={this.props.id}
-                  type="checkbox"
-                  onClick={this.handleCompletion}
-                  checked={this.props.checked}
-                />
-                <span className="checkmark"></span>
-              </label>
-            </div>
-            <div>
-              <button onClick={this.handleEdit}>
-                <i className="fa fa-pencil"></i>
-              </button>
-              <button onClick={this.handleRemove}>
-                <i className="fa fa-trash"></i>
-              </button>
-            </div>
+    edit(id, newTask);
+    setEdition(false);
+  };
+  return (
+    <div
+      {...provided.draggableProps}
+      {...provided.dragHandleProps}
+      ref={innerRef}
+    >
+      {edition ? (
+        <form className="TodoItem-edit" onSubmit={handleSubmit}>
+          <input value={newTask} onChange={handleChange} />
+          <button>
+            <i className="fa fa-check"></i>
+          </button>
+        </form>
+      ) : (
+        <div className="TodoItem">
+          <div>
+            <span className="fas fa-grip-horizontal"></span>
+            <label
+              htmlFor={id}
+              className={` container ${completed ? "checked" : ""}`}
+            >
+              <span>{task}</span>
+              <input
+                id={id}
+                type="checkbox"
+                onClick={handleCompletion}
+                checked={checked}
+              />
+              <span className="checkmark"></span>
+            </label>
           </div>
-        )}
-      </div>
-    );
-  }
-}
+          <div>
+            <button onClick={handleEdit}>
+              <i className="fa fa-pencil"></i>
+            </button>
+            <button onClick={handleRemove}>
+              <i className="fa fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default TodoItem;
