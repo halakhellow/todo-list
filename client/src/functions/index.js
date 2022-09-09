@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const url = "http://localhost:5000/api/todos";
+const baseUrl = "http://localhost:5000/api";
 
 export const getTodosRequest = async () => {
   try {
-    const { data } = await axios.get(url);
+    const { data } = await axios.get(`${baseUrl}/todos`);
     return data;
   } catch (err) {
     console.log(err.message);
@@ -13,7 +13,7 @@ export const getTodosRequest = async () => {
 
 export const addTodoRequest = async (task) => {
   try {
-    const { data } = await axios.post(url, {
+    const { data } = await axios.post(`${baseUrl}/todos`, {
       task,
     });
     return data;
@@ -24,7 +24,7 @@ export const addTodoRequest = async (task) => {
 
 export const editTodoRequest = async (todo) => {
   try {
-    const { data } = await axios.put(`${url}/${todo._id}`, {
+    const { data } = await axios.put(`${baseUrl}/todos/${todo._id}`, {
       task: todo.task,
       completed: todo.completed,
     });
@@ -36,7 +36,7 @@ export const editTodoRequest = async (todo) => {
 
 export const deleteTodoRequest = async (todo) => {
   try {
-    await axios.delete(`${url}/${todo._id}`);
+    await axios.delete(`${baseUrl}/todos/${todo._id}`);
     return;
   } catch (err) {
     console.log(err.message);
