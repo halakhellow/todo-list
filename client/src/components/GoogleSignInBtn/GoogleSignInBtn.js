@@ -1,9 +1,12 @@
 import React from "react";
 import "./GoogleSignInBtn.css";
 
-const GoogleSignInBtn = (props) => {
+const GoogleSignInBtn = () => {
+  const handleClick = () => {
+    window.location.href = "http://localhost:5000/api/auth/google";
+  };
   return (
-    <button className="google-btn" {...props}>
+    <button className="google-btn" onClick={handleClick}>
       {" "}
       Sign in with
       <span>G</span>
