@@ -55,9 +55,9 @@ const TodoItem = ({ todo, provided, innerRef }) => {
             <span className="fas fa-grip-horizontal"></span>
             <label
               htmlFor="check"
-              className={` container ${todo.completed ? "checked" : ""}`}
+              className={`container ${todo.completed ? "checked" : ""}`}
             >
-              <span>{todo.task}</span>
+              <span className="todo-task">{todo.task}</span>
               <input
                 id="check"
                 type="checkbox"
@@ -69,7 +69,7 @@ const TodoItem = ({ todo, provided, innerRef }) => {
               <span className="checkmark"></span>
             </label>
           </div>
-          <div>
+          <div className="icons">
             <button onClick={handleEdit}>
               <i className="fa fa-pencil"></i>
             </button>
