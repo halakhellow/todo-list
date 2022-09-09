@@ -1,34 +1,39 @@
 import React, { useState } from "react";
+import { useQueryClient, useMutation } from "react-query";
+import { editTodoRequest, deleteTodoRequest } from "../../functions";
 import "./TodoItem.css";
 
-const TodoItem = ({
-  id,
-  task,
-  complete,
-  edit,
-  remove,
-  checked,
-  completed,
-  provided,
-  innerRef,
-}) => {
+const TodoItem = ({ todo, provided, innerRef }) => {
+  const queryClient = useQueryClient();
   const [edition, setEdition] = useState(false);
-  const [newTask, setNewTask] = useState(task);
-  const handleRemove = () => {
-    remove(id);
-  };
+  const [newTask, setNewTask] = useState(todo.task);
+
   const handleEdit = () => {
     setEdition(true);
   };
   const handleChange = (event) => {
     setNewTask(event.target.value);
   };
-  const handleCompletion = () => {
-    complete(id);
-  };
+  const { mutate: editTodo } = useMutation(
+    (updatedTodo) => editTodoRequest(updatedTodo),
+    {
+      onSettled: () => {
+        queryClient.invalidateQueries("todos");
+      },
+    }
+  );
+
+  const { mutate: deleteTodo } = useMutation(
+    (todo) => deleteTodoRequest(todo),
+    {
+      onSettled: () => {
+        queryClient.invalidateQueries("todos");
+      },
+    }
+  );
   const handleSubmit = (event) => {
     event.preventDefault();
-    edit(id, newTask);
+    editTodo({ ...todo, task: newTask });
     setEdition(false);
   };
   return (
@@ -49,15 +54,17 @@ const TodoItem = ({
           <div>
             <span className="fas fa-grip-horizontal"></span>
             <label
-              htmlFor={id}
-              className={` container ${completed ? "checked" : ""}`}
+              htmlFor="check"
+              className={` container ${todo.completed ? "checked" : ""}`}
             >
-              <span>{task}</span>
+              <span>{todo.task}</span>
               <input
-                id={id}
+                id="check"
                 type="checkbox"
-                onClick={handleCompletion}
-                checked={checked}
+                onClick={() =>
+                  editTodo({ ...todo, completed: !todo.completed })
+                }
+                checked={todo.completed}
               />
               <span className="checkmark"></span>
             </label>
@@ -66,7 +73,7 @@ const TodoItem = ({
             <button onClick={handleEdit}>
               <i className="fa fa-pencil"></i>
             </button>
-            <button onClick={handleRemove}>
+            <button onClick={() => deleteTodo(todo)}>
               <i className="fa fa-trash"></i>
             </button>
           </div>

@@ -1,20 +1,32 @@
 import React, { useState } from "react";
-import uuid from "react-uuid";
+import { useQueryClient, useMutation } from "react-query";
+import { addTodoRequest } from "../../functions";
 import "./TodoForm.css";
 
-const TodoForm = ({ add }) => {
-  const [todo, setTodo] = useState("");
+const TodoForm = ({}) => {
+  const queryClient = useQueryClient();
+
+  const [task, setTask] = useState("");
   const [disabled, toggleDisabled] = useState(true);
 
+  const { mutate: addTodo } = useMutation(
+    (newTodo) => addTodoRequest(newTodo),
+    {
+      onSettled: () => {
+        queryClient.invalidateQueries("todos");
+      },
+    }
+  );
+
   const handelChange = (event) => {
-    setTodo(event.target.value);
-    if (!todo) toggleDisabled(false);
+    setTask(event.target.value);
+    if (!task) toggleDisabled(false);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    add({ task: todo, id: uuid(), completed: false });
-    setTodo("");
+    addTodo(task);
+    setTask("");
     toggleDisabled(true);
   };
 
@@ -22,7 +34,7 @@ const TodoForm = ({ add }) => {
     <form onSubmit={handleSubmit} className="TodoForm">
       <input
         placeholder="Add new task .."
-        value={todo}
+        value={task}
         onChange={handelChange}
       />
       <button disabled={disabled}>+</button>
