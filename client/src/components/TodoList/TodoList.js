@@ -30,17 +30,24 @@ const TodoList = () => {
   };
   let todolist;
   if (!isLoading) {
-    todolist = todos.map((todo, index) => (
-      <Draggable key={todo._id} draggableId={todo.task} index={index}>
-        {(provided) => (
-          <TodoItem
-            innerRef={provided.innerRef}
-            provided={provided}
-            todo={todo}
-          />
-        )}
-      </Draggable>
-    ));
+    !todos
+      ? (todolist = (
+          <h2 className="no-todos">
+            Let's get things <span>DONE</span> today
+            <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+          </h2>
+        ))
+      : (todolist = todos.map((todo, index) => (
+          <Draggable key={todo._id} draggableId={todo.task} index={index}>
+            {(provided) => (
+              <TodoItem
+                innerRef={provided.innerRef}
+                provided={provided}
+                todo={todo}
+              />
+            )}
+          </Draggable>
+        )));
   }
   return (
     <div>

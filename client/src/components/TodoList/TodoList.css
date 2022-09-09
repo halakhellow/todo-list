@@ -12,6 +12,19 @@
   margin: 3rem auto;
 }
 
+.TodoList .no-todos {
+  margin-top: 3rem;
+}
+
+.TodoList .no-todos span {
+  color: #ffa500;
+}
+
+.TodoList .no-todos i {
+  margin-left: 1rem;
+  color: #fbef8a;
+}
+
 .TodoList-title img {
   position: absolute;
   top: 0;
