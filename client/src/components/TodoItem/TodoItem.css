@@ -8,21 +8,14 @@
   justify-content: space-between;
   width: 22rem;
   margin: 1rem auto;
-  background-color: #111;
-}
-
-.TodoItem .fa-grip-horizontal {
-  margin: 0 1rem 0 -2rem;
-  font-size: 0.9rem;
-  color: #c5c3c0;
-  cursor: grab;
+  background-color: transparent;
 }
 
 .container {
   display: block;
   position: relative;
   padding-left: 35px;
-  margin-bottom: 12px;
+  margin-bottom: 5px;
   cursor: pointer;
   font-size: 22px;
   user-select: none;
@@ -98,6 +91,10 @@
 
 .TodoItem label span:first-of-type {
   vertical-align: middle;
+}
+
+.TodoItem .icons {
+  margin-top: 5px;
 }
 
 .TodoItem button {

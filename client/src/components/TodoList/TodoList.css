@@ -19,10 +19,34 @@
 .TodoList .no-todos span {
   color: #ffa500;
 }
-
-.TodoList .no-todos i {
-  margin-left: 1rem;
+.circle {
+  display: inline-flex;
+  margin-left: 2rem;
+  border-radius: 50%;
   color: #fbef8a;
+  height: 22px;
+  width: 20px;
+  background: #fbef8a;
+  margin-bottom: 3px;
+  position: relative;
+  transition: 1s all ease;
+  animation: glow 1.5s infinite;
+}
+
+.circle:before {
+  position: absolute;
+  content: "";
+  height: 11px;
+  width: 7px;
+  left: 6px;
+  top: 21px;
+  margin: 0;
+  padding: 0;
+  display: block;
+  background: rgb(68, 53, 73);
+  border-radius: 2px;
+  display: inline-block;
+  border-top: 2px solid rgb(97, 81, 107);
 }
 
 .TodoList-title img {
@@ -37,4 +61,14 @@
 
 .TodoList ul div {
   cursor: default;
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: none;
+  }
+  50% {
+    box-shadow: 0 0 20px 3px #fbef8a;
+  }
 }
